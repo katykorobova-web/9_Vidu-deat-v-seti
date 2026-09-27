@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Виды деятельности в сети Интернет — 9 класс</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-tertiary: #f1f3f4;
+      --text-primary: #1a1a1a;
+      --text-secondary: #5f6368;
+      --text-muted: #9aa0a6;
+      --accent: #1a73e8;
+      --accent-hover: #1557b0;
+      --success: #1e8e3e;
+      --error: #d93025;
+      --border: #dadce0;
+      --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      --radius: 14px;
+      --radius-sm: 8px;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
+      padding: 20px 16px;
+    }
+
+    #app {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    /* Header */
+    .header {
+      background: var(--bg-primary);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-primary);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title .badge {
+      background: var(--accent);
+      color: white;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-primary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Form elements */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Radio/Checkbox */
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .option-item:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .option-item label {
+      flex: 1;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    /* Matching */
+    .matching-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .matching-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .matching-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .matching-item {
+      padding: 12px 14px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .matching-item:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .matching-item.selected {
+      border-color: var(--accent);
+      background: rgba(26, 115, 232, 0.1);
+    }
+
+    .matching-item.matched {
+      border-color: var(--success);
+      background: rgba(30, 142, 62, 0.1);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* Feedback */
+    .feedback {
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    .feedback.success {
+      background: rgba(30, 142, 62, 0.1);
+      color: var(--success);
+    }
+
+    .feedback.error {
+      background: rgba(217, 48, 37, 0.1);
+      color: var(--error);
+    }
+
+    .feedback.info {
+      background: rgba(26, 115, 232, 0.1);
+      color: var(--accent);
+    }
+
+    /* Progress */
+    .progress-bar {
+      height: 6px;
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    /* Theory content */
+    .theory-section {
+      margin-bottom: 20px;
+    }
+
+    .theory-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .theory-section p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .theory-section ul {
+      margin-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .theory-section li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    /* Start screen */
+    .start-content {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .start-content h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .start-content p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .info-list {
+      text-align: left;
+      background: var(--bg-secondary);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+    }
+
+    .info-list li {
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Result screen */
+    .result-score {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .result-score .score-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .result-score .score-total {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .result-details {
+      background: var(--bg-secondary);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-item.correct {
+      color: var(--success);
+    }
+
+    .result-item.incorrect {
+      color: var(--error);
+    }
+
+    /* Hidden utility */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Section numbering */
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    // === CONSTANTS ===
+    const QUESTIONS = [
+      {
+        id: 1,
+        type: 'multiple-choice',
+        title: 'Что такое информационная безопасность?',
+        options: [
+          'Защита информации от несанкционированного доступа и угроз',
+          'Блокировка всех сайтов в интернете',
+          'Удаление всех файлов с компьютера',
+          'Использование сложных паролей только для почты'
+        ],
+        correct: 0
+      },
+      {
+        id: 2,
+        type: 'multiple-select',
+        title: 'Какие опасности существуют в сети Интернет? (выберите все верные)',
+        options: [
+          'Фишинг — кража личных данных через поддельные сайты',
+          'Кибербуллинг — травля в интернете',
+          'Вирусы и вредоносное ПО',
+          'Слишком быстрая загрузка страниц'
+        ],
+        correct: [0, 1, 2]
+      },
+      {
+        id: 3,
+        type: 'text',
+        title: 'Как можно защитить свою веб-страницу? Назовите один способ',
+        correctAnswers: ['пароль', 'паролями', 'аутентификация', 'ssl', 'сертификат', 'шифрование', 'резервная копия', 'бэкап'],
+        hint: 'Подумайте о защите доступа или данных (пароль, шифрование, резервные копии...)'
+      },
+      {
+        id: 4,
+        type: 'matching',
+        title: 'Соотнесите вид деятельности с примером',
+        pairs: [
+          { left: 'Коммуникативная', right: 'Общение в мессенджерах и соцсетях' },
+          { left: 'Досуговая', right: 'Просмотр фильмов и прослушивание музыки' },
+          { left: 'Познавательная', right: 'Поиск информации для реферата' },
+          { left: 'С функционированием сети', right: 'Настройка роутера и сервера' }
+        ]
+      },
+      {
+        id: 5,
+        type: 'fill-blank',
+        title: 'Заполните пропуск',
+        text: 'Киберспорт — это соревновательная деятельность на основе __________ игр, где игроки или команды соревнуются друг с другом.',
+        correctAnswers: ['компьютерных', 'видео', 'цифровых'],
+        hint: 'Какие игры используются в киберспорте?'
+      }
+    ];
+
+    // === STATE ===
+    const state = {
+      currentScreen: 'start',
+      answers: {},
+      score: 0,
+      totalQuestions: QUESTIONS.length
+    };
+
+    // === RENDER FUNCTIONS ===
+    function render() {
+      const app = document.getElementById('app');
+      app.innerHTML = '';
+
+      switch (state.currentScreen) {
+        case 'start':
+          renderStartScreen(app);
+          break;
+        case 'theory':
+          renderTheoryScreen(app);
+          break;
+        case 'quiz':
+          renderQuizScreen(app);
+          break;
+        case 'result':
+          renderResultScreen(app);
+          break;
+      }
+    }
+
+    function renderStartScreen(app) {
+      const header = document.createElement('div');
+      header.className = 'header';
+      header.innerHTML = `
+        <h1>Виды деятельности в сети Интернет</h1>
+        <p>Информатика • 9 класс</p>
+      `;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="start-content">
+          <h2>Добро пожаловать!</h2>
+          <p>Сегодня вы повторите основы информационной безопасности и изучите основные виды деятельности в сети Интернет.</p>
+          
+          <ul class="info-list">
+            <li>📚 <strong>Повторение:</strong> информационная безопасность и защита в сети</li>
+            <li>📖 <strong>Новая тема:</strong> коммуникативная, досуговая, познавательная деятельность</li>
+            <li>🎮 <strong>Киберспорт:</strong> что это такое?</li>
+            <li>✅ <strong>5 заданий</strong> для проверки знаний</li>
+          </ul>
+
+          <button class="btn btn-primary btn-block" id="btn-start-theory">
+            Начать урок
+          </button>
+        </div>
+      `;
+
+      app.appendChild(header);
+      app.appendChild(card);
+
+      document.getElementById('btn-start-theory').addEventListener('click', () => {
+        state.currentScreen = 'theory';
+        render();
+      });
+    }
+
+    function renderTheoryScreen(app) {
+      const header = document.createElement('div');
+      header.className = 'header';
+      header.innerHTML = `
+        <h1><span class="section-number">1</span> Теоретический блок</h1>
+        <p>Изучите основные понятия перед выполнением заданий</p>
+      `;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="theory-section">
+          <h3>🔒 Информационная безопасность</h3>
+          <p><strong>Информационная безопасность</strong> — это защита информации от несанкционированного доступа, использования, раскрытия, искажения или уничтожения.</p>
+          <p><strong>Опасности в сети:</strong></p>
+          <ul>
+            <li>Фишинг — кража личных данных через поддельные сайты и письма</li>
+            <li>Кибербуллинг — травля и угрозы в интернете</li>
+            <li>Вирусы и вредоносное ПО</li>
+            <li>Мошенничество и кража персональных данных</li>
+          </ul>
+          <p><strong>Как защититься:</strong> использовать надёжные пароли, не переходить по подозрительным ссылкам, устанавливать антивирус, делать резервные копии.</p>
+        </div>
+
+        <div class="theory-section">
+          <h3>💬 Коммуникативная деятельность</h3>
+          <p>Общение с другими людьми через интернет-сервисы.</p>
+          <p><strong>Примеры:</strong> мессенджеры (Telegram, WhatsApp), социальные сети (VK, Instagram), электронная почта, видеозвонки.</p>
+        </div>
+
+        <div class="theory-section">
+          <h3>🎬 Досуговая деятельность</h3>
+          <p>Развлечения и отдых в интернете.</p>
+          <p><strong>Примеры:</strong> просмотр фильмов и сериалов, прослушивание музыки, онлайн-игры, чтение книг, виртуальные экскурсии.</p>
+        </div>
+
+        <div class="theory-section">
+          <h3>📚 Познавательная деятельность</h3>
+          <p>Поиск и изучение информации для обучения и самообразования.</p>
+          <p><strong>Примеры:</strong> поиск информации для рефератов, онлайн-курсы, образовательные платформы, электронные библиотеки, видеоуроки.</p>
+        </div>
+
+        <div class="theory-section">
+          <h3>⚙️ Деятельность, связанная с функционированием сети</h3>
+          <p>Техническое обеспечение работы интернета.</p>
+          <p><strong>Примеры:</strong> настройка роутеров и серверов, администрирование сетей, разработка веб-сайтов, обеспечение безопасности сетей.</p>
+        </div>
+
+        <div class="theory-section">
+          <h3>🎮 Киберспорт</h3>
+          <p><strong>Киберспорт</strong> — это соревновательная деятельность на основе компьютерных игр, где игроки или команды соревнуются друг с другом в определённых дисциплинах.</p>
+          <p><strong>Особенности:</strong> профессиональные игроки, турниры с призовыми фондами, команды и тренеры, трансляции для зрителей.</p>
+          <p><strong>Популярные дисциплины:</strong> Dota 2, CS:GO, League of Legends, Fortnite.</p>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="btn-back-start">← Назад</button>
+          <button class="btn btn-primary" id="btn-to-quiz">К заданиям →</button>
+        </div>
+      `;
+
+      app.appendChild(header);
+      app.appendChild(card);
+
+      document.getElementById('btn-back-start').addEventListener('click', () => {
+        state.currentScreen = 'start';
+        render();
+      });
+
+      document.getElementById('btn-to-quiz').addEventListener('click', () => {
+        state.currentScreen = 'quiz';
+        state.currentQuestionIndex = 0;
+        state.answers = {};
+        render();
+      });
+    }
+
+    function renderQuizScreen(app) {
+      const progress = ((state.currentQuestionIndex) / state.totalQuestions) * 100;
+
+      const header = document.createElement('div');
+      header.className = 'header';
+      header.innerHTML = `
+        <h1><span class="section-number">2</span> Задания</h1>
+        <p>Вопрос ${state.currentQuestionIndex + 1} из ${state.totalQuestions}</p>
+      `;
+
+      const progressBar = document.createElement('div');
+      progressBar.className = 'progress-bar';
+      progressBar.innerHTML = `<div class="progress-fill" style="width: ${progress}%"></div>`;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const question = QUESTIONS[state.currentQuestionIndex];
+      
+      const title = document.createElement('div');
+      title.className = 'card-title';
+      title.innerHTML = `<span class="badge">Задание ${state.currentQuestionIndex + 1}</span> ${question.title}`;
+      card.appendChild(title);
+
+      const formContainer = document.createElement('div');
+      formContainer.id = 'question-form';
+      card.appendChild(formContainer);
+
+      const feedbackDiv = document.createElement('div');
+      feedbackDiv.id = 'feedback';
+      feedbackDiv.className = 'feedback hidden';
+      card.appendChild(feedbackDiv);
+
+      const buttonGroup = document.createElement('div');
+      buttonGroup.className = 'btn-group';
+      buttonGroup.style.marginTop = '20px';
+      
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'btn btn-secondary';
+      prevBtn.textContent = '← Назад';
+      prevBtn.id = 'btn-prev';
+      if (state.currentQuestionIndex === 0) {
+        prevBtn.disabled = true;
+        prevBtn.style.opacity = '0.5';
+      }
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'btn btn-primary';
+      nextBtn.textContent = state.currentQuestionIndex === state.totalQuestions - 1 ? 'Завершить' : 'Далее →';
+      nextBtn.id = 'btn-next';
+
+      buttonGroup.appendChild(prevBtn);
+      buttonGroup.appendChild(nextBtn);
+      card.appendChild(buttonGroup);
+
+      app.appendChild(header);
+      app.appendChild(progressBar);
+      app.appendChild(card);
+
+      // Render question form
+      renderQuestionForm(formContainer, question);
+
+      // Event listeners
+      document.getElementById('btn-prev').addEventListener('click', () => {
+        if (state.currentQuestionIndex > 0) {
+          state.currentQuestionIndex--;
+          render();
+        }
+      });
+
+      document.getElementById('btn-next').addEventListener('click', () => {
+        if (validateCurrentQuestion()) {
+          if (state.currentQuestionIndex === state.totalQuestions - 1) {
+            calculateScore();
+            state.currentScreen = 'result';
+            render();
+          } else {
+            state.currentQuestionIndex++;
+            render();
+          }
+        }
+      });
+    }
+
+    function renderQuestionForm(container, question) {
+      container.innerHTML = '';
+
+      switch (question.type) {
+        case 'multiple-choice':
+          renderMultipleChoice(container, question);
+          break;
+        case 'multiple-select':
+          renderMultipleSelect(container, question);
+          break;
+        case 'text':
+          renderTextQuestion(container, question);
+          break;
+        case 'matching':
+          renderMatchingQuestion(container, question);
+          break;
+        case 'fill-blank':
+          renderFillBlankQuestion(container, question);
+          break;
+      }
+    }
+
+    function renderMultipleChoice(container, question) {
+      const formGroup = document.createElement('div');
+      formGroup.className = 'form-group';
+      formGroup.innerHTML = '<label class="form-label">Выберите один правильный ответ:</label>';
+
+      const optionGroup = document.createElement('div');
+      optionGroup.className = 'option-group';
+
+      question.options.forEach((option, index) => {
+        const optionItem = document.createElement('div');
+        optionItem.className = 'option-item';
+        
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'answer';
+        input.value = index;
+        input.id = `opt-${index}`;
+        if (state.answers[question.id] === index) {
+          input.checked = true;
+        }
+
+        const label = document.createElement('label');
+        label.htmlFor = `opt-${index}`;
+        label.textContent = option;
+
+        optionItem.appendChild(input);
+        optionItem.appendChild(label);
+        optionGroup.appendChild(optionItem);
+      });
+
+      formGroup.appendChild(optionGroup);
+      container.appendChild(formGroup);
+    }
+
+    function renderMultipleSelect(container, question) {
+      const formGroup = document.createElement('div');
+      formGroup.className = 'form-group';
+      formGroup.innerHTML = '<label class="form-label">Выберите все правильные ответы:</label>';
+
+      const optionGroup = document.createElement('div');
+      optionGroup.className = 'option-group';
+
+      const savedAnswers = state.answers[question.id] || [];
+
+      question.options.forEach((option, index) => {
+        const optionItem = document.createElement('div');
+        optionItem.className = 'option-item';
+        
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.name = 'answer';
+        input.value = index;
+        input.id = `opt-${index}`;
+        if (savedAnswers.includes(index)) {
+          input.checked = true;
+        }
+
+        const label = document.createElement('label');
+        label.htmlFor = `opt-${index}`;
+        label.textContent = option;
+
+        optionItem.appendChild(input);
+        optionItem.appendChild(label);
+        optionGroup.appendChild(optionItem);
+      });
+
+      formGroup.appendChild(optionGroup);
+      container.appendChild(formGroup);
+    }
+
+    function renderTextQuestion(container, question) {
+      const formGroup = document.createElement('div');
+      formGroup.className = 'form-group';
+      formGroup.innerHTML = `
+        <label class="form-label" for="text-answer">Введите ваш ответ:</label>
+        <input type="text" class="form-input" id="text-answer" placeholder="Ваш ответ..." value="${state.answers[question.id] || ''}">
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">💡 Подсказка: ${question.hint}</p>
+      `;
+      container.appendChild(formGroup);
+    }
+
+    function renderMatchingQuestion(container, question) {
+      const instructions = document.createElement('p');
+      instructions.style.cssText = 'font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;';
+      instructions.textContent = 'Нажмите на элемент слева, затем на соответствующий элемент справа:';
+      container.appendChild(instructions);
+
+      const grid = document.createElement('div');
+      grid.className = 'matching-grid';
+
+      const leftColumn = document.createElement('div');
+      leftColumn.className = 'matching-column';
+      leftColumn.id = 'matching-left';
+
+      const rightColumn = document.createElement('div');
+      rightColumn.className = 'matching-column';
+      rightColumn.id = 'matching-right';
+
+      // Shuffle right side for challenge
+      const rightItems = [...question.pairs].sort(() => Math.random() - 0.5);
+
+      question.pairs.forEach((pair, index) => {
+        const leftItem = document.createElement('div');
+        leftItem.className = 'matching-item';
+        leftItem.textContent = pair.left;
+        leftItem.dataset.index = index;
+        leftItem.dataset.side = 'left';
+        leftColumn.appendChild(leftItem);
+      });
+
+      rightItems.forEach((pair, originalIndex) => {
+        const rightItem = document.createElement('div');
+        rightItem.className = 'matching-item';
+        rightItem.textContent = pair.right;
+        rightItem.dataset.originalIndex = originalIndex;
+        rightItem.dataset.side = 'right';
+        rightColumn.appendChild(rightItem);
+      });
+
+      grid.appendChild(leftColumn);
+      grid.appendChild(rightColumn);
+      container.appendChild(grid);
+
+      // Store matching state
+      if (!state.matchingState) {
+        state.matchingState = {
+          selectedLeft: null,
+          matches: []
+        };
+      }
+
+      // Add click handlers
+      setTimeout(() => {
+        const items = container.querySelectorAll('.matching-item');
+        items.forEach(item => {
+          item.addEventListener('click', handleMatchingClick);
+        });
+      }, 0);
+    }
+
+    function handleMatchingClick(e) {
+      const item = e.currentTarget;
+      const side = item.dataset.side;
+      const container = item.closest('.card');
+      const question = QUESTIONS[state.currentQuestionIndex];
+
+      if (item.classList.contains('matched')) return;
+
+      if (side === 'left') {
+        // Clear previous left selection
+        container.querySelectorAll('.matching-item[data-side="left"]').forEach(i => i.classList.remove('selected'));
+        item.classList.add('selected');
+        state.matchingState.selectedLeft = {
+          index: parseInt(item.dataset.index),
+          element: item
+        };
+      } else if (side === 'right') {
+        if (!state.matchingState.selectedLeft) return;
+
+        const leftData = state.matchingState.selectedLeft;
+        const rightOriginalIndex = parseInt(item.dataset.originalIndex);
+
+        // Check if match
+        if (leftData.index === rightOriginalIndex) {
+          // Correct match!
+          leftData.element.classList.remove('selected');
+          leftData.element.classList.add('matched');
+          item.classList.add('matched');
+          
+          state.matchingState.matches.push(leftData.index);
+          state.matchingState.selectedLeft = null;
+
+          // Check if all matched
+          if (state.matchingState.matches.length === question.pairs.length) {
+            state.answers[question.id] = true;
+            showFeedback(container.querySelector('#feedback'), 'Все пары верно сопоставлены!', 'success');
+          }
+        } else {
+          // Wrong match - visual feedback
+          item.classList.add('selected');
+          setTimeout(() => {
+            item.classList.remove('selected');
+            container.querySelectorAll('.matching-item[data-side="left"]').forEach(i => i.classList.remove('selected'));
+            state.matchingState.selectedLeft = null;
+          }, 500);
+        }
+      }
+    }
+
+    function renderFillBlankQuestion(container, question) {
+      const formGroup = document.createElement('div');
+      formGroup.className = 'form-group';
+      
+      const textParts = question.text.split('__________');
+      formGroup.innerHTML = `
+        <label class="form-label">Вставьте пропущенное слово:</label>
+        <p style="font-size: 15px; margin-bottom: 12px;">
+          ${textParts[0]}
+          <input type="text" class="form-input" id="fill-answer" placeholder="ваш ответ" style="display: inline; width: auto; padding: 8px 12px;" value="${state.answers[question.id] || ''}">
+          ${textParts[1] || ''}
+        </p>
+        <p style="font-size: 13px; color: var(--text-muted);">💡 Подсказка: ${question.hint}</p>
+      `;
+      container.appendChild(formGroup);
+    }
+
+    function validateCurrentQuestion() {
+      const question = QUESTIONS[state.currentQuestionIndex];
+      const card = document.querySelector('#question-form').closest('.card');
+      const feedback = card.querySelector('#feedback');
+
+      let isValid = false;
+      let answer = null;
+
+      switch (question.type) {
+        case 'multiple-choice':
+          const selectedRadio = card.querySelector('input[name="answer"]:checked');
+          if (selectedRadio) {
+            answer = parseInt(selectedRadio.value);
+            state.answers[question.id] = answer;
+            isValid = true;
+          } else {
+            showFeedback(feedback, 'Выберите один вариант ответа', 'error');
+          }
+          break;
+
+        case 'multiple-select':
+          const selectedCheckboxes = card.querySelectorAll('input[name="answer"]:checked');
+          if (selectedCheckboxes.length > 0) {
+            answer = Array.from(selectedCheckboxes).map(cb => parseInt(cb.value));
+            state.answers[question.id] = answer;
+            isValid = true;
+          } else {
+            showFeedback(feedback, 'Выберите хотя бы один вариант', 'error');
+          }
+          break;
+
+        case 'text':
+          const textInput = card.querySelector('#text-answer');
+          if (textInput && textInput.value.trim().length > 0) {
+            answer = textInput.value.trim().toLowerCase();
+            state.answers[question.id] = textInput.value.trim();
+            isValid = true;
+          } else {
+            showFeedback(feedback, 'Введите ответ', 'error');
+          }
+          break;
+
+        case 'matching':
+          if (state.matchingState && state.matchingState.matches.length === question.pairs.length) {
+            answer = true;
+            state.answers[question.id] = true;
+            isValid = true;
+          } else {
+            showFeedback(feedback, 'Сопоставьте все пары', 'error');
+          }
+          break;
+
+        case 'fill-blank':
+          const fillInput = card.querySelector('#fill-answer');
+          if (fillInput && fillInput.value.trim().length > 0) {
+            answer = fillInput.value.trim().toLowerCase();
+            state.answers[question.id] = fillInput.value.trim();
+            isValid = true;
+          } else {
+            showFeedback(feedback, 'Вставьте пропущенное слово', 'error');
+          }
+          break;
+      }
+
+      return isValid;
+    }
+
+    function showFeedback(element, message, type) {
+      element.textContent = message;
+      element.className = `feedback ${type}`;
+      element.classList.remove('hidden');
+    }
+
+    function calculateScore() {
+      state.score = 0;
+
+      QUESTIONS.forEach(question => {
+        const userAnswer = state.answers[question.id];
+
+        switch (question.type) {
+          case 'multiple-choice':
+            if (userAnswer === question.correct) {
+              state.score++;
+            }
+            break;
+
+          case 'multiple-select':
+            if (userAnswer && Array.isArray(userAnswer)) {
+              const sortedUser = [...userAnswer].sort();
+              const sortedCorrect = [...question.correct].sort();
+              if (JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect)) {
+                state.score++;
+              }
+            }
+            break;
+
+          case 'text':
+            if (userAnswer) {
+              const normalizedAnswer = userAnswer.toLowerCase();
+              if (question.correctAnswers.some(ans => normalizedAnswer.includes(ans))) {
+                state.score++;
+              }
+            }
+            break;
+
+          case 'matching':
+            if (userAnswer === true) {
+              state.score++;
+            }
+            break;
+
+          case 'fill-blank':
+            if (userAnswer) {
+              const normalizedAnswer = userAnswer.toLowerCase();
+              if (question.correctAnswers.some(ans => normalizedAnswer.includes(ans))) {
+                state.score++;
+              }
+            }
+            break;
+        }
+      });
+    }
+
+    function renderResultScreen(app) {
+      const header = document.createElement('div');
+      header.className = 'header';
+      header.innerHTML = `
+        <h1><span class="section-number">3</span> Результаты</h1>
+        <p>Ваш итоговый счёт</p>
+      `;
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const percentage = Math.round((state.score / state.totalQuestions) * 100);
+
+      let message = '';
+      let messageColor = '';
+      if (percentage >= 80) {
+        message = 'Отлично! Вы хорошо усвоили материал.';
+        messageColor = 'var(--success)';
+      } else if (percentage >= 60) {
+        message = 'Хорошо! Но есть куда расти.';
+        messageColor = 'var(--accent)';
+      } else {
+        message = 'Стоит повторить тему ещё раз.';
+        messageColor = 'var(--error)';
+      }
+
+      card.innerHTML = `
+        <div class="result-score">
+          <div class="score-number">${state.score} из ${state.totalQuestions}</div>
+          <div class="score-total">${percentage}% правильных ответов</div>
+          <p style="font-size: 16px; color: ${messageColor}; font-weight: 500;">${message}</p>
+        </div>
+
+        <div class="result-details">
+          <h3 style="font-size: 16px; margin-bottom: 12px;">Детализация:</h3>
+          ${QUESTIONS.map((q, index) => {
+            const isCorrect = checkAnswerCorrect(q, state.answers[q.id]);
+            return `
+              <div class="result-item ${isCorrect ? 'correct' : 'incorrect'}">
+                <span>Задание ${index + 1}</span>
+                <span>${isCorrect ? '✓ Верно' : '✗ Ошибка'}</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="btn-restart">Начать заново</button>
+          <button class="btn btn-primary" id="btn-theory">Повторить теорию</button>
+        </div>
+      `;
+
+      app.appendChild(header);
+      app.appendChild(card);
+
+      document.getElementById('btn-restart').addEventListener('click', () => {
+        state.currentScreen = 'start';
+        state.answers = {};
+        state.score = 0;
+        state.matchingState = null;
+        render();
+      });
+
+      document.getElementById('btn-theory').addEventListener('click', () => {
+        state.currentScreen = 'theory';
+        render();
+      });
+    }
+
+    function checkAnswerCorrect(question, userAnswer) {
+      switch (question.type) {
+        case 'multiple-choice':
+          return userAnswer === question.correct;
+        case 'multiple-select':
+          if (!userAnswer || !Array.isArray(userAnswer)) return false;
+          const sortedUser = [...userAnswer].sort();
+          const sortedCorrect = [...question.correct].sort();
+          return JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect);
+        case 'text':
+          if (!userAnswer) return false;
+          const normalizedAnswer = userAnswer.toLowerCase();
+          return question.correctAnswers.some(ans => normalizedAnswer.includes(ans));
+        case 'matching':
+          return userAnswer === true;
+        case 'fill-blank':
+          if (!userAnswer) return false;
+          const normalizedFill = userAnswer.toLowerCase();
+          return question.correctAnswers.some(ans => normalizedFill.includes(ans));
+        default:
+          return false;
+      }
+    }
+
+    // === INIT ===
+    function init() {
+      render();
+    }
+
+    // Start app
+    init();
+  </script>
+</body>
+</html>
+Мои допущения
+О классе и уровне:
+
+Класс базового уровня (9 класс), поэтому теория дана с конкретными примерами из жизни школьников (мессенджеры, соцсети, фильмы).
+
+Предполагается, что ученики уже имеют базовое представление об интернете, но нуждаются в систематизации понятий.
+
+Термины объяснены просто, без излишней технической сложности.
+
+О времени на занятии:
+
+На теоретический блок: 10–15 минут (учитель может комментировать слайды/экран).
+
+На выполнение 5 заданий: 15–20 минут (ученики работают за своими ПК).
+
+На обсуждение результатов: 5–10 минут.
+
+Итого: урок на 35–45 минут.
+
+Что проверить перед показом ученикам:
+
+Браузер: Откройте файл в современном браузере (Chrome, Firefox, Edge, Safari) — все функции работают без интернета.
+
+Масштаб: Проверьте на разных размерах окна (от мобильного до полного экрана) — вёрстка адаптивная.
