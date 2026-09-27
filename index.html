@@ -468,10 +468,8 @@
         type: 'matching',
         title: 'Соотнесите вид деятельности с примером',
         pairs: [
-          { left: 'Коммуникативная', right: 'Общение в мессенджерах и соцсетях' },
-          { left: 'Досуговая', right: 'Просмотр фильмов и прослушивание музыки' },
           { left: 'Познавательная', right: 'Поиск информации для реферата' },
-          { left: 'С функционированием сети', right: 'Настройка роутера и сервера' }
+          { left: 'С функционированием сети', right: 'Настройка роутера' }
         ]
       },
       {
@@ -489,7 +487,8 @@
       currentScreen: 'start',
       answers: {},
       score: 0,
-      totalQuestions: QUESTIONS.length
+      totalQuestions: QUESTIONS.length,
+      matchingState: null
     };
 
     // === RENDER FUNCTIONS ===
@@ -623,6 +622,7 @@
         state.currentScreen = 'quiz';
         state.currentQuestionIndex = 0;
         state.answers = {};
+        state.matchingState = null;
         render();
       });
     }
@@ -857,12 +857,10 @@
       container.appendChild(grid);
 
       // Store matching state
-      if (!state.matchingState) {
-        state.matchingState = {
-          selectedLeft: null,
-          matches: []
-        };
-      }
+      state.matchingState = {
+        selectedLeft: null,
+        matches: []
+      };
 
       // Add click handlers
       setTimeout(() => {
@@ -1164,6 +1162,8 @@
     init();
   </script>
 </body>
+</html>
+
 </html>
 
 
