@@ -1,1169 +1,1338 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Виды деятельности в сети Интернет — 9 класс</title>
-  <style>
-    :root {
-      --bg-primary: #ffffff;
-      --bg-secondary: #f8f9fa;
-      --bg-tertiary: #f1f3f4;
-      --text-primary: #1a1a1a;
-      --text-secondary: #5f6368;
-      --text-muted: #9aa0a6;
-      --accent: #1a73e8;
-      --accent-hover: #1557b0;
-      --success: #1e8e3e;
-      --error: #d93025;
-      --border: #dadce0;
-      --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-      --radius: 14px;
-      --radius-sm: 8px;
-      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Виды деятельности в сети Интернет · 9 класс</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --surface-2: #f4f4f5;
+    --border: #e4e4e7;
+    --border-strong: #d4d4d8;
+    --text: #18181b;
+    --text-muted: #71717a;
+    --text-soft: #52525b;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --accent-hover: #1d4ed8;
+    --success: #16a34a;
+    --success-soft: #dcfce7;
+    --error: #dc2626;
+    --error-soft: #fee2e2;
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow: 0 4px 16px rgba(0,0,0,0.06);
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
 
-    body {
-      font-family: var(--font);
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      line-height: 1.5;
-      min-height: 100vh;
-      padding: 20px 16px;
-    }
+  #app {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 24px 16px 80px;
+  }
 
-    #app {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 4px 24px;
+    gap: 12px;
+  }
+  .header-title {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .progress-wrap {
+    flex: 1;
+    max-width: 240px;
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
 
-    .screen {
-      display: none;
-    }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+  }
+  .card h1 {
+    font-size: 28px;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+  .card h2 {
+    font-size: 20px;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .card p {
+    margin: 0 0 12px;
+    color: var(--text-soft);
+  }
+  .card p:last-child { margin-bottom: 0; }
 
-    .screen.active {
-      display: block;
-    }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
 
-    /* Header */
-    .header {
-      background: var(--bg-primary);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
-    }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    min-height: 44px;
+  }
+  .btn:focus-visible {
+    outline: 3px solid var(--accent-soft);
+    outline-offset: 2px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+  .btn-primary:disabled {
+    background: var(--border-strong);
+    cursor: not-allowed;
+    color: var(--text-muted);
+  }
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .btn-secondary:hover { background: var(--surface-2); }
 
-    .header h1 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-    }
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
 
-    .header p {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
+  .question-num {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
 
-    /* Cards */
-    .card {
-      background: var(--bg-primary);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
-    }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+    width: 100%;
+    min-height: 44px;
+  }
+  .option:hover { border-color: var(--border-strong); background: var(--surface-2); }
+  .option:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+  .option.selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .option.correct {
+    border-color: var(--success);
+    background: var(--success-soft);
+  }
+  .option.incorrect {
+    border-color: var(--error);
+    background: var(--error-soft);
+  }
+  .option-radio {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-strong);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+  .option.selected .option-radio {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+  .option.selected .option-radio::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .option-text { flex: 1; }
 
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+  .option-check {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border-strong);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+  }
+  .option.selected .option-check {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+  .option.selected .option-check::after {
+    content: '✓';
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
 
-    .card-title .badge {
-      background: var(--accent);
-      color: white;
-      font-size: 12px;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-weight: 500;
-    }
+  .text-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--surface);
+    color: var(--text);
+    transition: border-color 0.15s ease;
+    min-height: 44px;
+  }
+  .text-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  textarea.text-input {
+    resize: vertical;
+    min-height: 88px;
+    line-height: 1.5;
+  }
 
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 24px;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      min-height: 44px;
-      min-width: 44px;
-    }
+  .fill-text {
+    font-size: 15px;
+    line-height: 2.2;
+    color: var(--text);
+  }
+  .blank-input {
+    display: inline-block;
+    width: 140px;
+    padding: 4px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 15px;
+    background: var(--surface);
+    color: var(--text);
+    text-align: center;
+    vertical-align: baseline;
+    margin: 0 2px;
+    transition: all 0.15s ease;
+  }
+  .blank-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .blank-input.correct {
+    border-color: var(--success);
+    background: var(--success-soft);
+  }
+  .blank-input.incorrect {
+    border-color: var(--error);
+    background: var(--error-soft);
+  }
 
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
+  .matching {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 560px) {
+    .matching { grid-template-columns: 1fr; }
+  }
+  .match-col { display: flex; flex-direction: column; gap: 8px; }
+  .match-col-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+    padding: 0 4px;
+  }
+  .match-item {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s ease;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .match-item:hover { border-color: var(--border-strong); }
+  .match-item.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .match-item.paired {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .match-item.correct {
+    border-color: var(--success);
+    background: var(--success-soft);
+  }
+  .match-item.incorrect {
+    border-color: var(--error);
+    background: var(--error-soft);
+  }
 
-    .btn-primary:hover {
-      background: var(--accent-hover);
-    }
+  .feedback {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.success {
+    background: var(--success-soft);
+    color: var(--success);
+  }
+  .feedback.error {
+    background: var(--error-soft);
+    color: var(--error);
+  }
 
-    .btn-primary:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
+  .theory-block {
+    padding: 18px 20px;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+  }
+  .theory-block h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .theory-block p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: var(--text-soft);
+  }
+  .theory-block ul {
+    margin: 6px 0 0;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--text-soft);
+  }
+  .theory-block li { margin-bottom: 4px; }
 
-    .btn-secondary {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
-    }
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 8px auto 20px;
+    border: 3px solid var(--accent);
+  }
+  .score-num {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .score-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: -2px;
+  }
+  .result-msg {
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-soft);
+    margin-bottom: 20px;
+  }
 
-    .btn-secondary:hover {
-      background: var(--border);
-    }
+  .start-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin: 18px 0;
+  }
+  .meta-item {
+    padding: 12px 14px;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+  }
+  .meta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
 
-    .btn-block {
-      width: 100%;
-    }
+  .section-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin: 24px 0 12px;
+    padding: 0 4px;
+  }
 
-    .btn-group {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeIn 0.3s ease; }
 
-    /* Form elements */
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 15px;
-      font-family: inherit;
-      transition: border-color 0.2s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .form-input::placeholder {
-      color: var(--text-muted);
-    }
-
-    /* Radio/Checkbox */
-    .option-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .option-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      background: var(--bg-secondary);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .option-item:hover {
-      background: var(--bg-tertiary);
-    }
-
-    .option-item input[type="radio"],
-    .option-item input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--accent);
-      cursor: pointer;
-    }
-
-    .option-item label {
-      flex: 1;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    /* Matching */
-    .matching-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    @media (max-width: 600px) {
-      .matching-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .matching-column {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .matching-item {
-      padding: 12px 14px;
-      background: var(--bg-secondary);
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .matching-item:hover {
-      background: var(--bg-tertiary);
-    }
-
-    .matching-item.selected {
-      border-color: var(--accent);
-      background: rgba(26, 115, 232, 0.1);
-    }
-
-    .matching-item.matched {
-      border-color: var(--success);
-      background: rgba(30, 142, 62, 0.1);
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    /* Feedback */
-    .feedback {
-      padding: 12px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 14px;
-      margin-top: 12px;
-    }
-
-    .feedback.success {
-      background: rgba(30, 142, 62, 0.1);
-      color: var(--success);
-    }
-
-    .feedback.error {
-      background: rgba(217, 48, 37, 0.1);
-      color: var(--error);
-    }
-
-    .feedback.info {
-      background: rgba(26, 115, 232, 0.1);
-      color: var(--accent);
-    }
-
-    /* Progress */
-    .progress-bar {
-      height: 6px;
-      background: var(--bg-tertiary);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      transition: width 0.3s;
-    }
-
-    /* Theory content */
-    .theory-section {
-      margin-bottom: 20px;
-    }
-
-    .theory-section h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--accent);
-    }
-
-    .theory-section p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-    }
-
-    .theory-section ul {
-      margin-left: 20px;
-      margin-bottom: 12px;
-    }
-
-    .theory-section li {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    /* Start screen */
-    .start-content {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .start-content h2 {
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-
-    .start-content p {
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      font-size: 15px;
-    }
-
-    .info-list {
-      text-align: left;
-      background: var(--bg-secondary);
-      padding: 20px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 24px;
-    }
-
-    .info-list li {
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    /* Result screen */
-    .result-score {
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    .result-score .score-number {
-      font-size: 48px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .result-score .score-total {
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-    }
-
-    .result-details {
-      background: var(--bg-secondary);
-      padding: 20px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 20px;
-    }
-
-    .result-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 14px;
-    }
-
-    .result-item:last-child {
-      border-bottom: none;
-    }
-
-    .result-item.correct {
-      color: var(--success);
-    }
-
-    .result-item.incorrect {
-      color: var(--error);
-    }
-
-    /* Hidden utility */
-    .hidden {
-      display: none !important;
-    }
-
-    /* Section numbering */
-    .section-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      background: var(--accent);
-      color: white;
-      border-radius: 50%;
-      font-size: 13px;
-      font-weight: 600;
-    }
-  </style>
+  .hint {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-style: italic;
+  }
+</style>
 </head>
 <body>
-  <div id="app"></div>
+<div id="app"></div>
 
-  <script>
-    // === CONSTANTS ===
-    const QUESTIONS = [
-      {
-        id: 1,
-        type: 'multiple-choice',
-        title: 'Что такое информационная безопасность?',
-        options: [
-          'Защита информации от несанкционированного доступа и угроз',
-          'Блокировка всех сайтов в интернете',
-          'Удаление всех файлов с компьютера',
-          'Использование сложных паролей только для почты'
-        ],
-        correct: 0
-      },
-      {
-        id: 2,
-        type: 'multiple-select',
-        title: 'Какие опасности существуют в сети Интернет? (выберите все верные)',
-        options: [
-          'Фишинг — кража личных данных через поддельные сайты',
-          'Кибербуллинг — травля в интернете',
-          'Вирусы и вредоносное ПО',
-          'Слишком быстрая загрузка страниц'
-        ],
-        correct: [0, 1, 2]
-      },
-      {
-        id: 3,
-        type: 'text',
-        title: 'Как можно защитить свою веб-страницу? Назовите один способ',
-        correctAnswers: ['пароль', 'паролями', 'аутентификация', 'ssl', 'сертификат', 'шифрование', 'резервная копия', 'бэкап'],
-        hint: 'Подумайте о защите доступа или данных (пароль, шифрование, резервные копии...)'
-      },
-      {
-        id: 4,
-        type: 'matching',
-        title: 'Соотнесите вид деятельности с примером',
-        pairs: [
-          { left: 'Познавательная', right: 'Поиск информации для реферата' },
-          { left: 'С функционированием сети', right: 'Настройка роутера' }
-        ]
-      },
-      {
-        id: 5,
-        type: 'fill-blank',
-        title: 'Заполните пропуск',
-        text: 'Киберспорт — это соревновательная деятельность на основе __________ игр, где игроки или команды соревнуются друг с другом.',
-        correctAnswers: ['компьютерных', 'видео', 'цифровых'],
-        hint: 'Какие игры используются в киберспорте?'
+<script>
+// Константы: вопросы, теория, задания
+const SCREENS = {
+  START: 'start',
+  REPEAT: 'repeat',
+  THEORY: 'theory',
+  PRACTICE: 'practice',
+  RESULTS: 'results'
+};
+
+const REPEAT_QUESTIONS = [
+  {
+    id: 'r1',
+    type: 'choice',
+    text: 'Что такое информационная безопасность?',
+    options: [
+      'Состояние защищённости информации и интересов пользователей от различных угроз',
+      'Скорость работы компьютера в сети',
+      'Способ подключения к Интернету',
+      'Тип операционной системы'
+    ],
+    correct: 0,
+    explanation: 'Информационная безопасность — это защищённость информации и интересов от угроз.'
+  },
+  {
+    id: 'r2',
+    type: 'multi',
+    text: 'Какие опасности существуют в сети Интернет? (выберите все верные)',
+    options: [
+      'Компьютерные вирусы',
+      'Фишинг — кража персональных данных',
+      'Печатные книги',
+      'Кибербуллинг (травля в сети)',
+      'Программное обеспечение'
+    ],
+    correct: [0, 1, 3],
+    explanation: 'Вирусы, фишинг и кибербуллинг — реальные угрозы в сети.'
+  },
+  {
+    id: 'r3',
+    type: 'choice',
+    text: 'Как можно защитить себя в сети?',
+    options: [
+      'Использовать простые пароли вроде «12345»',
+      'Сообщать пароль друзьям',
+      'Использовать сложные пароли, двухфакторную аутентификацию и антивирус',
+      'Переходить по всем ссылкам в письмах'
+    ],
+    correct: 2,
+    explanation: 'Сложные пароли, 2FA и антивирус — основа защиты.'
+  },
+  {
+    id: 'r4',
+    type: 'choice',
+    text: 'Как защитить свою веб-страницу?',
+    options: [
+      'Опубликовать пароль от неё в открытом доступе',
+      'Использовать HTTPS, надёжные пароли администратора и регулярные резервные копии',
+      'Никогда не обновлять CMS',
+      'Не использовать защиту вообще'
+    ],
+    correct: 1,
+    explanation: 'HTTPS, надёжные пароли и резервные копии — ключевые меры защиты сайта.'
+  }
+];
+
+const THEORY = [
+  {
+    title: '1. Коммуникативная деятельность',
+    text: 'Общение людей с помощью сетевых средств.',
+    examples: [
+      'Электронная почта (e-mail)',
+      'Мессенджеры (Telegram, WhatsApp)',
+      'Социальные сети (ВКонтакте, Одноклассники)',
+      'Видеосвязь (Zoom, Skype)'
+    ],
+    feature: 'Позволяет общаться на расстоянии мгновенно и практически бесплатно.'
+  },
+  {
+    title: '2. Досуговая деятельность',
+    text: 'Отдых и развлечения в сети.',
+    examples: [
+      'Онлайн-игры (в том числе киберспортивные дисциплины)',
+      'Прослушивание музыки и просмотр фильмов',
+      'Чтение художественной литературы',
+      'Хобби-сообщества и форумы'
+    ],
+    feature: 'Интернет стал одной из главных площадок для отдыха и развлечений.'
+  },
+  {
+    title: '3. Познавательная деятельность',
+    text: 'Поиск и получение новых знаний.',
+    examples: [
+      'Онлайн-курсы и видеолекции (Университетская школа, Stepik)',
+      'Электронные энциклопедии и библиотеки',
+      'Поисковые системы (Яндекс, Google)',
+      'Образовательные платформы'
+    ],
+    feature: 'Делает знания доступными в любое время и в любом месте.'
+  },
+  {
+    title: '4. Деятельность, связанная с функционированием сети Интернет',
+    text: 'Работа, обеспечивающая функционирование самого Интернета.',
+    examples: [
+      'Администрирование серверов и сетей',
+      'Хостинг сайтов и облачные сервисы',
+      'Разработка сайтов и приложений',
+      'Поддержка каналов связи'
+    ],
+    feature: 'Без этих специалистов Интернет просто не смог бы работать.'
+  },
+  {
+    title: '5. Киберспорт',
+    text: 'Соревновательная деятельность по компьютерным играм.',
+    examples: [
+      'Командные дисциплины: Dota 2, Counter-Strike 2',
+      'Индивидуальные: StarCraft, Hearthstone',
+      'Турниры с крупными призовыми фондами',
+      'Официальные спортивные звания в России'
+    ],
+    feature: 'Киберспорт — это официальная спортивная дисциплина, требующая тренировки, стратегии и командной работы.'
+  }
+];
+
+const PRACTICE_QUESTIONS = [
+  {
+    id: 'p1',
+    type: 'choice',
+    text: 'К какому виду деятельности в сети относится использование электронной почты для отправки письма учителю?',
+    options: [
+      'Досуговая деятельность',
+      'Коммуникативная деятельность',
+      'Познавательная деятельность',
+      'Деятельность по функционированию сети'
+    ],
+    correct: 1,
+    explanation: 'Переписка по e-mail — это общение, то есть коммуникативная деятельность.'
+  },
+  {
+    id: 'p2',
+    type: 'matching',
+    text: 'Сопоставьте вид деятельности и пример:',
+    pairs: [
+      { left: 'Коммуникативная', right: 'Видеозвонок по Skype' },
+      { left: 'Досуговая', right: 'Онлайн-игра' },
+      { left: 'Познавательная', right: 'Онлайн-курс на Stepik' },
+      { left: 'Функционирование сети', right: 'Администрирование сервера' }
+    ]
+  },
+  {
+    id: 'p3',
+    type: 'fill',
+    text: 'Заполните пропуски в определении киберспорта:',
+    template: [
+      { type: 'text', value: 'Киберспорт — это ' },
+      { type: 'blank', answer: 'соревновательная', alt: ['соревнования'] },
+      { type: 'text', value: ' деятельность по ' },
+      { type: 'blank', answer: 'компьютерным', alt: ['компьютерные'] },
+      { type: 'text', value: ' играм.' }
+    ]
+  },
+  {
+    id: 'p4',
+    type: 'input',
+    text: 'Приведите один пример познавательной деятельности в сети Интернет (коротко, 2–5 слов):',
+    keywords: ['курс', 'энциклопед', 'библиотек', 'википед', 'лекци', 'урок', 'stepik', 'учеб', 'образов', 'словар', 'реферат', 'поиск'],
+    explanation: 'Примеры: онлайн-курс, электронная энциклопедия, видеолекция и т.п.'
+  },
+  {
+    id: 'p5',
+    type: 'choice',
+    text: 'Что из перечисленного относится к деятельности, связанной с функционированием сети Интернет?',
+    options: [
+      'Просмотр фильма онлайн',
+      'Общение в мессенджере',
+      'Администрирование сервера',
+      'Прохождение онлайн-курса'
+    ],
+    correct: 2,
+    explanation: 'Администрирование сервера обеспечивает работу самой сети.'
+  }
+];
+
+// State
+const state = {
+  screen: SCREENS.START,
+  currentQ: 0,
+  repeatAnswers: {},
+  repeatChecked: {},
+  practiceAnswers: {},
+  practiceChecked: {},
+  score: 0,
+  total: 0,
+  repeatScore: 0,
+  practiceScore: 0,
+  _activeLeft: undefined
+};
+
+// Render
+const app = document.getElementById('app');
+
+function render() {
+  const progress = getProgress();
+
+  let html = `
+    <header class="header">
+      <div class="header-title">Информатика · 9 класс</div>
+      <div class="progress-wrap" role="progressbar" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width:${progress}%"></div>
+      </div>
+    </header>
+  `;
+
+  switch (state.screen) {
+    case SCREENS.START: html += renderStart(); break;
+    case SCREENS.REPEAT: html += renderRepeat(); break;
+    case SCREENS.THEORY: html += renderTheory(); break;
+    case SCREENS.PRACTICE: html += renderPractice(); break;
+    case SCREENS.RESULTS: html += renderResults(); break;
+  }
+
+  app.innerHTML = html;
+  attachHandlers();
+}
+
+function getProgress() {
+  const map = {
+    [SCREENS.START]: 0,
+    [SCREENS.REPEAT]: 25,
+    [SCREENS.THEORY]: 50,
+    [SCREENS.PRACTICE]: 75,
+    [SCREENS.RESULTS]: 100
+  };
+  return map[state.screen] || 0;
+}
+
+function renderStart() {
+  return `
+    <div class="card fade-in">
+      <span class="badge">Интерактивный рабочий лист</span>
+      <h1>Виды деятельности в сети Интернет</h1>
+      <p>Повторим информационную безопасность, изучим основные виды деятельности в сети и закрепим материал заданиями.</p>
+      <div class="start-meta">
+        <div class="meta-item">
+          <div class="meta-label">Класс</div>
+          <div class="meta-value">9</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Предмет</div>
+          <div class="meta-value">Информатика</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Заданий</div>
+          <div class="meta-value">4 + 5</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Урок</div>
+          <div class="meta-value">№ 1 по теме</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" data-action="start">Начать урок →</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderRepeat() {
+  const q = REPEAT_QUESTIONS[state.currentQ];
+  const checked = state.repeatChecked[q.id];
+  const userAns = state.repeatAnswers[q.id];
+
+  let optionsHtml = '';
+  if (q.type === 'choice') {
+    optionsHtml = q.options.map((opt, i) => {
+      let cls = 'option';
+      if (checked) {
+        if (i === q.correct) cls += ' correct';
+        else if (userAns === i) cls += ' incorrect';
+      } else if (userAns === i) {
+        cls += ' selected';
       }
-    ];
-
-    // === STATE ===
-    const state = {
-      currentScreen: 'start',
-      answers: {},
-      score: 0,
-      totalQuestions: QUESTIONS.length,
-      matchingState: null
-    };
-
-    // === RENDER FUNCTIONS ===
-    function render() {
-      const app = document.getElementById('app');
-      app.innerHTML = '';
-
-      switch (state.currentScreen) {
-        case 'start':
-          renderStartScreen(app);
-          break;
-        case 'theory':
-          renderTheoryScreen(app);
-          break;
-        case 'quiz':
-          renderQuizScreen(app);
-          break;
-        case 'result':
-          renderResultScreen(app);
-          break;
-      }
-    }
-
-    function renderStartScreen(app) {
-      const header = document.createElement('div');
-      header.className = 'header';
-      header.innerHTML = `
-        <h1>Виды деятельности в сети Интернет</h1>
-        <p>Информатика • 9 класс</p>
+      return `
+        <button class="${cls}" data-action="select-repeat" data-idx="${i}" ${checked ? 'disabled' : ''}>
+          <span class="option-radio"></span>
+          <span class="option-text">${escapeHtml(opt)}</span>
+        </button>
       `;
+    }).join('');
+  } else if (q.type === 'multi') {
+    const selected = userAns || [];
+    optionsHtml = q.options.map((opt, i) => {
+      let cls = 'option';
+      const isSel = selected.includes(i);
+      if (checked) {
+        const isCorrect = q.correct.includes(i);
+        if (isCorrect) cls += ' correct';
+        else if (isSel) cls += ' incorrect';
+      } else if (isSel) {
+        cls += ' selected';
+      }
+      return `
+        <button class="${cls}" data-action="toggle-repeat" data-idx="${i}" ${checked ? 'disabled' : ''}>
+          <span class="option-check"></span>
+          <span class="option-text">${escapeHtml(opt)}</span>
+        </button>
+      `;
+    }).join('');
+  }
 
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <div class="start-content">
-          <h2>Добро пожаловать!</h2>
-          <p>Сегодня вы повторите основы информационной безопасности и изучите основные виды деятельности в сети Интернет.</p>
-          
-          <ul class="info-list">
-            <li>📚 <strong>Повторение:</strong> информационная безопасность и защита в сети</li>
-            <li>📖 <strong>Новая тема:</strong> коммуникативная, досуговая, познавательная деятельность</li>
-            <li>🎮 <strong>Киберспорт:</strong> что это такое?</li>
-            <li>✅ <strong>5 заданий</strong> для проверки знаний</li>
-          </ul>
+  let feedbackHtml = '';
+  if (checked) {
+    const isCorrect = checkRepeatAnswer(q);
+    feedbackHtml = `
+      <div class="feedback show ${isCorrect ? 'success' : 'error'}">
+        ${isCorrect ? '✓ Верно!' : '✗ Не совсем.'} ${escapeHtml(q.explanation)}
+      </div>
+    `;
+  }
 
-          <button class="btn btn-primary btn-block" id="btn-start-theory">
-            Начать урок
+  const isLast = state.currentQ === REPEAT_QUESTIONS.length - 1;
+  const canNext = userAns !== undefined && userAns !== null && (q.type !== 'multi' || (Array.isArray(userAns) && userAns.length > 0));
+
+  return `
+    <div class="section-title">Повторение · Информационная безопасность</div>
+    <div class="card fade-in">
+      <div class="question-num">Вопрос ${state.currentQ + 1} из ${REPEAT_QUESTIONS.length}</div>
+      <div class="question-text">${escapeHtml(q.text)}</div>
+      ${q.type === 'multi' ? '<div class="hint">Можно выбрать несколько вариантов</div>' : ''}
+      <div class="options">${optionsHtml}</div>
+      ${feedbackHtml}
+      <div class="btn-row">
+        ${!checked ? `
+          <button class="btn btn-primary" data-action="check-repeat" ${!canNext ? 'disabled' : ''}>Проверить</button>
+        ` : `
+          <button class="btn btn-primary" data-action="${isLast ? 'go-theory' : 'next-repeat'}">
+            ${isLast ? 'К теории →' : 'Далее →'}
           </button>
-        </div>
-      `;
+        `}
+      </div>
+    </div>
+  `;
+}
 
-      app.appendChild(header);
-      app.appendChild(card);
+function renderTheory() {
+  const blocks = THEORY.map(t => `
+    <div class="theory-block">
+      <h3>${escapeHtml(t.title)}</h3>
+      <p>${escapeHtml(t.text)}</p>
+      <ul>
+        ${t.examples.map(e => `<li>${escapeHtml(e)}</li>`).join('')}
+      </ul>
+      <p style="margin-top:10px;"><strong>Особенность:</strong> ${escapeHtml(t.feature)}</p>
+    </div>
+  `).join('');
 
-      document.getElementById('btn-start-theory').addEventListener('click', () => {
-        state.currentScreen = 'theory';
-        render();
-      });
+  return `
+    <div class="section-title">Теоретический блок</div>
+    <div class="card fade-in">
+      <span class="badge">Изучите перед заданиями</span>
+      <h2>Виды деятельности в сети Интернет</h2>
+      <p>Интернет используется людьми для разных целей. Учёные выделяют несколько основных видов деятельности в сети.</p>
+      ${blocks}
+      <div class="btn-row">
+        <button class="btn btn-primary" data-action="go-practice">Перейти к заданиям →</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderPractice() {
+  const q = PRACTICE_QUESTIONS[state.currentQ];
+  let body = '';
+
+  if (q.type === 'choice') {
+    body = renderPracticeChoice(q);
+  } else if (q.type === 'matching') {
+    body = renderPracticeMatching(q);
+  } else if (q.type === 'fill') {
+    body = renderPracticeFill(q);
+  } else if (q.type === 'input') {
+    body = renderPracticeInput(q);
+  }
+
+  const isLast = state.currentQ === PRACTICE_QUESTIONS.length - 1;
+  const checked = state.practiceChecked[q.id];
+  const canNext = hasPracticeAnswer(q);
+
+  return `
+    <div class="section-title">Закрепление · ${state.currentQ + 1} из ${PRACTICE_QUESTIONS.length}</div>
+    <div class="card fade-in">
+      <div class="question-num">Задание ${state.currentQ + 1}</div>
+      <div class="question-text">${escapeHtml(q.text)}</div>
+      ${body}
+      <div class="btn-row">
+        ${!checked ? `
+          <button class="btn btn-primary" data-action="check-practice" ${!canNext ? 'disabled' : ''}>Проверить</button>
+        ` : `
+          <button class="btn btn-primary" data-action="${isLast ? 'go-results' : 'next-practice'}">
+            ${isLast ? 'Показать результат →' : 'Далее →'}
+          </button>
+        `}
+      </div>
+    </div>
+  `;
+}
+
+function renderPracticeChoice(q) {
+  const checked = state.practiceChecked[q.id];
+  const userAns = state.practiceAnswers[q.id];
+  const optionsHtml = q.options.map((opt, i) => {
+    let cls = 'option';
+    if (checked) {
+      if (i === q.correct) cls += ' correct';
+      else if (userAns === i) cls += ' incorrect';
+    } else if (userAns === i) {
+      cls += ' selected';
     }
+    return `
+      <button class="${cls}" data-action="select-practice" data-idx="${i}" ${checked ? 'disabled' : ''}>
+        <span class="option-radio"></span>
+        <span class="option-text">${escapeHtml(opt)}</span>
+      </button>
+    `;
+  }).join('');
 
-    function renderTheoryScreen(app) {
-      const header = document.createElement('div');
-      header.className = 'header';
-      header.innerHTML = `
-        <h1><span class="section-number">1</span> Теоретический блок</h1>
-        <p>Изучите основные понятия перед выполнением заданий</p>
-      `;
+  let feedbackHtml = '';
+  if (checked) {
+    const isCorrect = userAns === q.correct;
+    feedbackHtml = `
+      <div class="feedback show ${isCorrect ? 'success' : 'error'}">
+        ${isCorrect ? '✓ Верно!' : '✗ Неверно.'} ${escapeHtml(q.explanation || '')}
+      </div>
+    `;
+  }
 
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <div class="theory-section">
-          <h3>🔒 Информационная безопасность</h3>
-          <p><strong>Информационная безопасность</strong> — это защита информации от несанкционированного доступа, использования, раскрытия, искажения или уничтожения.</p>
-          <p><strong>Опасности в сети:</strong></p>
-          <ul>
-            <li>Фишинг — кража личных данных через поддельные сайты и письма</li>
-            <li>Кибербуллинг — травля и угрозы в интернете</li>
-            <li>Вирусы и вредоносное ПО</li>
-            <li>Мошенничество и кража персональных данных</li>
-          </ul>
-          <p><strong>Как защититься:</strong> использовать надёжные пароли, не переходить по подозрительным ссылкам, устанавливать антивирус, делать резервные копии.</p>
-        </div>
+  return `<div class="options">${optionsHtml}</div>${feedbackHtml}`;
+}
 
-        <div class="theory-section">
-          <h3>💬 Коммуникативная деятельность</h3>
-          <p>Общение с другими людьми через интернет-сервисы.</p>
-          <p><strong>Примеры:</strong> мессенджеры (Telegram, WhatsApp), социальные сети (VK, Instagram), электронная почта, видеозвонки.</p>
-        </div>
+function renderPracticeMatching(q) {
+  const checked = state.practiceChecked[q.id];
+  const userPairs = state.practiceAnswers[q.id] || {};
+  const rightOrder = getShuffledRight(q);
 
-        <div class="theory-section">
-          <h3>🎬 Досуговая деятельность</h3>
-          <p>Развлечения и отдых в интернете.</p>
-          <p><strong>Примеры:</strong> просмотр фильмов и сериалов, прослушивание музыки, онлайн-игры, чтение книг, виртуальные экскурсии.</p>
-        </div>
-
-        <div class="theory-section">
-          <h3>📚 Познавательная деятельность</h3>
-          <p>Поиск и изучение информации для обучения и самообразования.</p>
-          <p><strong>Примеры:</strong> поиск информации для рефератов, онлайн-курсы, образовательные платформы, электронные библиотеки, видеоуроки.</p>
-        </div>
-
-        <div class="theory-section">
-          <h3>⚙️ Деятельность, связанная с функционированием сети</h3>
-          <p>Техническое обеспечение работы интернета.</p>
-          <p><strong>Примеры:</strong> настройка роутеров и серверов, администрирование сетей, разработка веб-сайтов, обеспечение безопасности сетей.</p>
-        </div>
-
-        <div class="theory-section">
-          <h3>🎮 Киберспорт</h3>
-          <p><strong>Киберспорт</strong> — это соревновательная деятельность на основе компьютерных игр, где игроки или команды соревнуются друг с другом в определённых дисциплинах.</p>
-          <p><strong>Особенности:</strong> профессиональные игроки, турниры с призовыми фондами, команды и тренеры, трансляции для зрителей.</p>
-          <p><strong>Популярные дисциплины:</strong> Dota 2, CS:GO, League of Legends, Fortnite.</p>
-        </div>
-
-        <div class="btn-group">
-          <button class="btn btn-secondary" id="btn-back-start">← Назад</button>
-          <button class="btn btn-primary" id="btn-to-quiz">К заданиям →</button>
-        </div>
-      `;
-
-      app.appendChild(header);
-      app.appendChild(card);
-
-      document.getElementById('btn-back-start').addEventListener('click', () => {
-        state.currentScreen = 'start';
-        render();
-      });
-
-      document.getElementById('btn-to-quiz').addEventListener('click', () => {
-        state.currentScreen = 'quiz';
-        state.currentQuestionIndex = 0;
-        state.answers = {};
-        state.matchingState = null;
-        render();
-      });
+  const leftHtml = q.pairs.map((p, i) => {
+    let cls = 'match-item';
+    if (userPairs[i] !== undefined) cls += ' paired active';
+    if (checked) {
+      cls = 'match-item';
+      const correctRightIdx = q.pairs.findIndex(pp => pp.left === p.left);
+      const userRightIdx = userPairs[i];
+      if (userRightIdx === correctRightIdx) cls += ' correct';
+      else if (userRightIdx !== undefined) cls += ' incorrect';
     }
+    return `<div class="${cls}" data-action="select-left" data-idx="${i}">${escapeHtml(p.left)}</div>`;
+  }).join('');
 
-    function renderQuizScreen(app) {
-      const progress = ((state.currentQuestionIndex) / state.totalQuestions) * 100;
-
-      const header = document.createElement('div');
-      header.className = 'header';
-      header.innerHTML = `
-        <h1><span class="section-number">2</span> Задания</h1>
-        <p>Вопрос ${state.currentQuestionIndex + 1} из ${state.totalQuestions}</p>
-      `;
-
-      const progressBar = document.createElement('div');
-      progressBar.className = 'progress-bar';
-      progressBar.innerHTML = `<div class="progress-fill" style="width: ${progress}%"></div>`;
-
-      const card = document.createElement('div');
-      card.className = 'card';
-
-      const question = QUESTIONS[state.currentQuestionIndex];
-      
-      const title = document.createElement('div');
-      title.className = 'card-title';
-      title.innerHTML = `<span class="badge">Задание ${state.currentQuestionIndex + 1}</span> ${question.title}`;
-      card.appendChild(title);
-
-      const formContainer = document.createElement('div');
-      formContainer.id = 'question-form';
-      card.appendChild(formContainer);
-
-      const feedbackDiv = document.createElement('div');
-      feedbackDiv.id = 'feedback';
-      feedbackDiv.className = 'feedback hidden';
-      card.appendChild(feedbackDiv);
-
-      const buttonGroup = document.createElement('div');
-      buttonGroup.className = 'btn-group';
-      buttonGroup.style.marginTop = '20px';
-      
-      const prevBtn = document.createElement('button');
-      prevBtn.className = 'btn btn-secondary';
-      prevBtn.textContent = '← Назад';
-      prevBtn.id = 'btn-prev';
-      if (state.currentQuestionIndex === 0) {
-        prevBtn.disabled = true;
-        prevBtn.style.opacity = '0.5';
-      }
-
-      const nextBtn = document.createElement('button');
-      nextBtn.className = 'btn btn-primary';
-      nextBtn.textContent = state.currentQuestionIndex === state.totalQuestions - 1 ? 'Завершить' : 'Далее →';
-      nextBtn.id = 'btn-next';
-
-      buttonGroup.appendChild(prevBtn);
-      buttonGroup.appendChild(nextBtn);
-      card.appendChild(buttonGroup);
-
-      app.appendChild(header);
-      app.appendChild(progressBar);
-      app.appendChild(card);
-
-      // Render question form
-      renderQuestionForm(formContainer, question);
-
-      // Event listeners
-      document.getElementById('btn-prev').addEventListener('click', () => {
-        if (state.currentQuestionIndex > 0) {
-          state.currentQuestionIndex--;
-          render();
-        }
-      });
-
-      document.getElementById('btn-next').addEventListener('click', () => {
-        if (validateCurrentQuestion()) {
-          if (state.currentQuestionIndex === state.totalQuestions - 1) {
-            calculateScore();
-            state.currentScreen = 'result';
-            render();
-          } else {
-            state.currentQuestionIndex++;
-            render();
-          }
-        }
-      });
-    }
-
-    function renderQuestionForm(container, question) {
-      container.innerHTML = '';
-
-      switch (question.type) {
-        case 'multiple-choice':
-          renderMultipleChoice(container, question);
-          break;
-        case 'multiple-select':
-          renderMultipleSelect(container, question);
-          break;
-        case 'text':
-          renderTextQuestion(container, question);
-          break;
-        case 'matching':
-          renderMatchingQuestion(container, question);
-          break;
-        case 'fill-blank':
-          renderFillBlankQuestion(container, question);
-          break;
+  const rightHtml = rightOrder.map((p, i) => {
+    const origIdx = q.pairs.indexOf(p);
+    let cls = 'match-item';
+    const isPaired = Object.values(userPairs).includes(origIdx);
+    if (isPaired) cls += ' paired';
+    if (checked) {
+      cls = 'match-item';
+      const leftIdx = Object.keys(userPairs).find(k => userPairs[k] === origIdx);
+      if (leftIdx !== undefined) {
+        if (parseInt(leftIdx) === origIdx) cls += ' correct';
+        else cls += ' incorrect';
       }
     }
+    return `<div class="${cls}" data-action="select-right" data-idx="${origIdx}">${escapeHtml(p.right)}</div>`;
+  }).join('');
 
-    function renderMultipleChoice(container, question) {
-      const formGroup = document.createElement('div');
-      formGroup.className = 'form-group';
-      formGroup.innerHTML = '<label class="form-label">Выберите один правильный ответ:</label>';
+  let feedbackHtml = '';
+  if (checked) {
+    const correctCount = q.pairs.filter((p, i) => userPairs[i] === i).length;
+    const isFull = correctCount === q.pairs.length;
+    feedbackHtml = `
+      <div class="feedback show ${isFull ? 'success' : 'error'}">
+        ${isFull ? '✓ Все пары верны!' : `Верно: ${correctCount} из ${q.pairs.length}.`}
+      </div>
+    `;
+  }
 
-      const optionGroup = document.createElement('div');
-      optionGroup.className = 'option-group';
+  const hintHtml = !checked && Object.keys(userPairs).length === 0
+    ? '<div class="hint">Сначала нажмите на элемент слева, затем — на соответствующий ему справа</div>'
+    : (!checked ? '<div class="hint">Нажмите на элемент слева, чтобы изменить пару</div>' : '');
 
-      question.options.forEach((option, index) => {
-        const optionItem = document.createElement('div');
-        optionItem.className = 'option-item';
-        
-        const input = document.createElement('input');
-        input.type = 'radio';
-        input.name = 'answer';
-        input.value = index;
-        input.id = `opt-${index}`;
-        if (state.answers[question.id] === index) {
-          input.checked = true;
-        }
+  return `
+    ${hintHtml}
+    <div class="matching">
+      <div class="match-col">
+        <div class="match-col-title">Вид деятельности</div>
+        ${leftHtml}
+      </div>
+      <div class="match-col">
+        <div class="match-col-title">Пример</div>
+        ${rightHtml}
+      </div>
+    </div>
+    ${feedbackHtml}
+  `;
+}
 
-        const label = document.createElement('label');
-        label.htmlFor = `opt-${index}`;
-        label.textContent = option;
-
-        optionItem.appendChild(input);
-        optionItem.appendChild(label);
-        optionGroup.appendChild(optionItem);
-      });
-
-      formGroup.appendChild(optionGroup);
-      container.appendChild(formGroup);
+const _rightShuffleCache = {};
+function getShuffledRight(q) {
+  if (!_rightShuffleCache[q.id]) {
+    const arr = [...q.pairs];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = (i * 7 + 3) % (i + 1);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
+    _rightShuffleCache[q.id] = arr;
+  }
+  return _rightShuffleCache[q.id];
+}
 
-    function renderMultipleSelect(container, question) {
-      const formGroup = document.createElement('div');
-      formGroup.className = 'form-group';
-      formGroup.innerHTML = '<label class="form-label">Выберите все правильные ответы:</label>';
+function renderPracticeFill(q) {
+  const checked = state.practiceChecked[q.id];
+  const userBlanks = state.practiceAnswers[q.id] || [];
 
-      const optionGroup = document.createElement('div');
-      optionGroup.className = 'option-group';
+  // Собираем индексы пропусков в шаблоне
+  const blankIndices = [];
+  q.template.forEach((part, idx) => {
+    if (part.type === 'blank') blankIndices.push(idx);
+  });
 
-      const savedAnswers = state.answers[question.id] || [];
-
-      question.options.forEach((option, index) => {
-        const optionItem = document.createElement('div');
-        optionItem.className = 'option-item';
-        
-        const input = document.createElement('input');
-        input.type = 'checkbox';
-        input.name = 'answer';
-        input.value = index;
-        input.id = `opt-${index}`;
-        if (savedAnswers.includes(index)) {
-          input.checked = true;
-        }
-
-        const label = document.createElement('label');
-        label.htmlFor = `opt-${index}`;
-        label.textContent = option;
-
-        optionItem.appendChild(input);
-        optionItem.appendChild(label);
-        optionGroup.appendChild(optionItem);
-      });
-
-      formGroup.appendChild(optionGroup);
-      container.appendChild(formGroup);
-    }
-
-    function renderTextQuestion(container, question) {
-      const formGroup = document.createElement('div');
-      formGroup.className = 'form-group';
-      formGroup.innerHTML = `
-        <label class="form-label" for="text-answer">Введите ваш ответ:</label>
-        <input type="text" class="form-input" id="text-answer" placeholder="Ваш ответ..." value="${state.answers[question.id] || ''}">
-        <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">💡 Подсказка: ${question.hint}</p>
-      `;
-      container.appendChild(formGroup);
-    }
-
-    function renderMatchingQuestion(container, question) {
-      const instructions = document.createElement('p');
-      instructions.style.cssText = 'font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;';
-      instructions.textContent = 'Нажмите на элемент слева, затем на соответствующий элемент справа:';
-      container.appendChild(instructions);
-
-      const grid = document.createElement('div');
-      grid.className = 'matching-grid';
-
-      const leftColumn = document.createElement('div');
-      leftColumn.className = 'matching-column';
-      leftColumn.id = 'matching-left';
-
-      const rightColumn = document.createElement('div');
-      rightColumn.className = 'matching-column';
-      rightColumn.id = 'matching-right';
-
-      // Shuffle right side for challenge
-      const rightItems = [...question.pairs].sort(() => Math.random() - 0.5);
-
-      question.pairs.forEach((pair, index) => {
-        const leftItem = document.createElement('div');
-        leftItem.className = 'matching-item';
-        leftItem.textContent = pair.left;
-        leftItem.dataset.index = index;
-        leftItem.dataset.side = 'left';
-        leftColumn.appendChild(leftItem);
-      });
-
-      rightItems.forEach((pair, originalIndex) => {
-        const rightItem = document.createElement('div');
-        rightItem.className = 'matching-item';
-        rightItem.textContent = pair.right;
-        rightItem.dataset.originalIndex = originalIndex;
-        rightItem.dataset.side = 'right';
-        rightColumn.appendChild(rightItem);
-      });
-
-      grid.appendChild(leftColumn);
-      grid.appendChild(rightColumn);
-      container.appendChild(grid);
-
-      // Store matching state
-      state.matchingState = {
-        selectedLeft: null,
-        matches: []
-      };
-
-      // Add click handlers
-      setTimeout(() => {
-        const items = container.querySelectorAll('.matching-item');
-        items.forEach(item => {
-          item.addEventListener('click', handleMatchingClick);
-        });
-      }, 0);
-    }
-
-    function handleMatchingClick(e) {
-      const item = e.currentTarget;
-      const side = item.dataset.side;
-      const container = item.closest('.card');
-      const question = QUESTIONS[state.currentQuestionIndex];
-
-      if (item.classList.contains('matched')) return;
-
-      if (side === 'left') {
-        // Clear previous left selection
-        container.querySelectorAll('.matching-item[data-side="left"]').forEach(i => i.classList.remove('selected'));
-        item.classList.add('selected');
-        state.matchingState.selectedLeft = {
-          index: parseInt(item.dataset.index),
-          element: item
-        };
-      } else if (side === 'right') {
-        if (!state.matchingState.selectedLeft) return;
-
-        const leftData = state.matchingState.selectedLeft;
-        const rightOriginalIndex = parseInt(item.dataset.originalIndex);
-
-        // Check if match
-        if (leftData.index === rightOriginalIndex) {
-          // Correct match!
-          leftData.element.classList.remove('selected');
-          leftData.element.classList.add('matched');
-          item.classList.add('matched');
-          
-          state.matchingState.matches.push(leftData.index);
-          state.matchingState.selectedLeft = null;
-
-          // Check if all matched
-          if (state.matchingState.matches.length === question.pairs.length) {
-            state.answers[question.id] = true;
-            showFeedback(container.querySelector('#feedback'), 'Все пары верно сопоставлены!', 'success');
-          }
-        } else {
-          // Wrong match - visual feedback
-          item.classList.add('selected');
-          setTimeout(() => {
-            item.classList.remove('selected');
-            container.querySelectorAll('.matching-item[data-side="left"]').forEach(i => i.classList.remove('selected'));
-            state.matchingState.selectedLeft = null;
-          }, 500);
-        }
+  const parts = q.template.map((part, i) => {
+    if (part.type === 'text') {
+      return escapeHtml(part.value);
+    } else {
+      const val = userBlanks[i] || '';
+      let cls = 'blank-input';
+      if (checked) {
+        const isOk = checkBlank(val, part);
+        cls += isOk ? ' correct' : ' incorrect';
       }
+      return `<input type="text" class="${cls}" data-action="fill-input" data-idx="${i}" value="${escapeAttr(val)}" ${checked ? 'disabled' : ''} placeholder="..." aria-label="Пропуск ${blankIndices.indexOf(i)+1}">`;
     }
+  }).join('');
 
-    function renderFillBlankQuestion(container, question) {
-      const formGroup = document.createElement('div');
-      formGroup.className = 'form-group';
-      
-      const textParts = question.text.split('__________');
-      formGroup.innerHTML = `
-        <label class="form-label">Вставьте пропущенное слово:</label>
-        <p style="font-size: 15px; margin-bottom: 12px;">
-          ${textParts[0]}
-          <input type="text" class="form-input" id="fill-answer" placeholder="ваш ответ" style="display: inline; width: auto; padding: 8px 12px;" value="${state.answers[question.id] || ''}">
-          ${textParts[1] || ''}
-        </p>
-        <p style="font-size: 13px; color: var(--text-muted);">💡 Подсказка: ${question.hint}</p>
-      `;
-      container.appendChild(formGroup);
-    }
+  let feedbackHtml = '';
+  if (checked) {
+    const blanks = q.template.filter(p => p.type === 'blank');
+    const correctCount = blanks.filter((b) => {
+      const origIdx = q.template.indexOf(b);
+      return checkBlank(userBlanks[origIdx] || '', b);
+    }).length;
+    const isFull = correctCount === blanks.length;
+    feedbackHtml = `
+      <div class="feedback show ${isFull ? 'success' : 'error'}">
+        ${isFull ? '✓ Все пропуски заполнены верно!' : `Верно: ${correctCount} из ${blanks.length}. Правильные ответы: ${blanks.map(b => b.answer).join(', ')}`}
+      </div>
+    `;
+  }
 
-    function validateCurrentQuestion() {
-      const question = QUESTIONS[state.currentQuestionIndex];
-      const card = document.querySelector('#question-form').closest('.card');
-      const feedback = card.querySelector('#feedback');
+  return `<div class="fill-text">${parts}</div>${feedbackHtml}`;
+}
 
-      let isValid = false;
-      let answer = null;
+function renderPracticeInput(q) {
+  const checked = state.practiceChecked[q.id];
+  const val = state.practiceAnswers[q.id] || '';
 
-      switch (question.type) {
-        case 'multiple-choice':
-          const selectedRadio = card.querySelector('input[name="answer"]:checked');
-          if (selectedRadio) {
-            answer = parseInt(selectedRadio.value);
-            state.answers[question.id] = answer;
-            isValid = true;
-          } else {
-            showFeedback(feedback, 'Выберите один вариант ответа', 'error');
-          }
-          break;
+  let feedbackHtml = '';
+  if (checked) {
+    const isOk = checkInputQuestion(q, val);
+    feedbackHtml = `
+      <div class="feedback show ${isOk ? 'success' : 'error'}">
+        ${isOk ? '✓ Принято!' : '✗ Попробуйте сформулировать иначе.'} ${escapeHtml(q.explanation || '')}
+      </div>
+    `;
+  }
 
-        case 'multiple-select':
-          const selectedCheckboxes = card.querySelectorAll('input[name="answer"]:checked');
-          if (selectedCheckboxes.length > 0) {
-            answer = Array.from(selectedCheckboxes).map(cb => parseInt(cb.value));
-            state.answers[question.id] = answer;
-            isValid = true;
-          } else {
-            showFeedback(feedback, 'Выберите хотя бы один вариант', 'error');
-          }
-          break;
+  return `
+    <textarea class="text-input" data-action="input-answer" placeholder="Ваш ответ..." ${checked ? 'disabled' : ''}>${escapeHtml(val)}</textarea>
+    ${feedbackHtml}
+  `;
+}
 
-        case 'text':
-          const textInput = card.querySelector('#text-answer');
-          if (textInput && textInput.value.trim().length > 0) {
-            answer = textInput.value.trim().toLowerCase();
-            state.answers[question.id] = textInput.value.trim();
-            isValid = true;
-          } else {
-            showFeedback(feedback, 'Введите ответ', 'error');
-          }
-          break;
+function renderResults() {
+  const { score, total } = state;
+  const percent = total > 0 ? Math.round((score / total) * 100) : 0;
+  let msg = '';
+  let grade = '';
+  if (percent >= 90) { msg = 'Отличный результат! Тема усвоена.'; grade = '5'; }
+  else if (percent >= 75) { msg = 'Хороший результат, но есть что повторить.'; grade = '4'; }
+  else if (percent >= 50) { msg = 'Неплохо, но стоит вернуться к теории.'; grade = '3'; }
+  else { msg = 'Рекомендуем перечитать теорию и попробовать снова.'; grade = '2'; }
 
-        case 'matching':
-          if (state.matchingState && state.matchingState.matches.length === question.pairs.length) {
-            answer = true;
-            state.answers[question.id] = true;
-            isValid = true;
-          } else {
-            showFeedback(feedback, 'Сопоставьте все пары', 'error');
-          }
-          break;
-
-        case 'fill-blank':
-          const fillInput = card.querySelector('#fill-answer');
-          if (fillInput && fillInput.value.trim().length > 0) {
-            answer = fillInput.value.trim().toLowerCase();
-            state.answers[question.id] = fillInput.value.trim();
-            isValid = true;
-          } else {
-            showFeedback(feedback, 'Вставьте пропущенное слово', 'error');
-          }
-          break;
-      }
-
-      return isValid;
-    }
-
-    function showFeedback(element, message, type) {
-      element.textContent = message;
-      element.className = `feedback ${type}`;
-      element.classList.remove('hidden');
-    }
-
-    function calculateScore() {
-      state.score = 0;
-
-      QUESTIONS.forEach(question => {
-        const userAnswer = state.answers[question.id];
-
-        switch (question.type) {
-          case 'multiple-choice':
-            if (userAnswer === question.correct) {
-              state.score++;
-            }
-            break;
-
-          case 'multiple-select':
-            if (userAnswer && Array.isArray(userAnswer)) {
-              const sortedUser = [...userAnswer].sort();
-              const sortedCorrect = [...question.correct].sort();
-              if (JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect)) {
-                state.score++;
-              }
-            }
-            break;
-
-          case 'text':
-            if (userAnswer) {
-              const normalizedAnswer = userAnswer.toLowerCase();
-              if (question.correctAnswers.some(ans => normalizedAnswer.includes(ans))) {
-                state.score++;
-              }
-            }
-            break;
-
-          case 'matching':
-            if (userAnswer === true) {
-              state.score++;
-            }
-            break;
-
-          case 'fill-blank':
-            if (userAnswer) {
-              const normalizedAnswer = userAnswer.toLowerCase();
-              if (question.correctAnswers.some(ans => normalizedAnswer.includes(ans))) {
-                state.score++;
-              }
-            }
-            break;
-        }
-      });
-    }
-
-    function renderResultScreen(app) {
-      const header = document.createElement('div');
-      header.className = 'header';
-      header.innerHTML = `
-        <h1><span class="section-number">3</span> Результаты</h1>
-        <p>Ваш итоговый счёт</p>
-      `;
-
-      const card = document.createElement('div');
-      card.className = 'card';
-
-      const percentage = Math.round((state.score / state.totalQuestions) * 100);
-
-      let message = '';
-      let messageColor = '';
-      if (percentage >= 80) {
-        message = 'Отлично! Вы хорошо усвоили материал.';
-        messageColor = 'var(--success)';
-      } else if (percentage >= 60) {
-        message = 'Хорошо! Но есть куда расти.';
-        messageColor = 'var(--accent)';
-      } else {
-        message = 'Стоит повторить тему ещё раз.';
-        messageColor = 'var(--error)';
-      }
-
-      card.innerHTML = `
-        <div class="result-score">
-          <div class="score-number">${state.score} из ${state.totalQuestions}</div>
-          <div class="score-total">${percentage}% правильных ответов</div>
-          <p style="font-size: 16px; color: ${messageColor}; font-weight: 500;">${message}</p>
+  return `
+    <div class="card fade-in" style="text-align:center;">
+      <span class="badge">Итоги рабочего листа</span>
+      <h2>Ваш результат</h2>
+      <div class="score-circle">
+        <div class="score-num">${score}/${total}</div>
+        <div class="score-label">${percent}%</div>
+      </div>
+      <div class="result-msg">${msg}</div>
+      <div class="start-meta" style="text-align:left;">
+        <div class="meta-item">
+          <div class="meta-label">Повторение</div>
+          <div class="meta-value">${state.repeatScore || 0} / ${REPEAT_QUESTIONS.length}</div>
         </div>
-
-        <div class="result-details">
-          <h3 style="font-size: 16px; margin-bottom: 12px;">Детализация:</h3>
-          ${QUESTIONS.map((q, index) => {
-            const isCorrect = checkAnswerCorrect(q, state.answers[q.id]);
-            return `
-              <div class="result-item ${isCorrect ? 'correct' : 'incorrect'}">
-                <span>Задание ${index + 1}</span>
-                <span>${isCorrect ? '✓ Верно' : '✗ Ошибка'}</span>
-              </div>
-            `;
-          }).join('')}
+        <div class="meta-item">
+          <div class="meta-label">Закрепление</div>
+          <div class="meta-value">${state.practiceScore || 0} / ${PRACTICE_QUESTIONS.length}</div>
         </div>
-
-        <div class="btn-group">
-          <button class="btn btn-secondary" id="btn-restart">Начать заново</button>
-          <button class="btn btn-primary" id="btn-theory">Повторить теорию</button>
+        <div class="meta-item">
+          <div class="meta-label">Рекомендуемая оценка</div>
+          <div class="meta-value">${grade}</div>
         </div>
-      `;
+      </div>
+      <div class="btn-row" style="justify-content:center;">
+        <button class="btn btn-secondary" data-action="restart">Пройти ещё раз</button>
+      </div>
+    </div>
+  `;
+}
 
-      app.appendChild(header);
-      app.appendChild(card);
-
-      document.getElementById('btn-restart').addEventListener('click', () => {
-        state.currentScreen = 'start';
-        state.answers = {};
-        state.score = 0;
-        state.matchingState = null;
-        render();
-      });
-
-      document.getElementById('btn-theory').addEventListener('click', () => {
-        state.currentScreen = 'theory';
-        render();
-      });
+// Handlers
+function attachHandlers() {
+  app.querySelectorAll('[data-action]').forEach(el => {
+    el.addEventListener('click', handleClick);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.addEventListener('input', handleInput);
     }
+  });
+}
 
-    function checkAnswerCorrect(question, userAnswer) {
-      switch (question.type) {
-        case 'multiple-choice':
-          return userAnswer === question.correct;
-        case 'multiple-select':
-          if (!userAnswer || !Array.isArray(userAnswer)) return false;
-          const sortedUser = [...userAnswer].sort();
-          const sortedCorrect = [...question.correct].sort();
-          return JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect);
-        case 'text':
-          if (!userAnswer) return false;
-          const normalizedAnswer = userAnswer.toLowerCase();
-          return question.correctAnswers.some(ans => normalizedAnswer.includes(ans));
-        case 'matching':
-          return userAnswer === true;
-        case 'fill-blank':
-          if (!userAnswer) return false;
-          const normalizedFill = userAnswer.toLowerCase();
-          return question.correctAnswers.some(ans => normalizedFill.includes(ans));
-        default:
-          return false;
-      }
-    }
+function handleClick(e) {
+  const el = e.currentTarget;
+  const action = el.dataset.action;
 
-    // === INIT ===
-    function init() {
+  switch (action) {
+    case 'start':
+      state.screen = SCREENS.REPEAT;
+      state.currentQ = 0;
       render();
-    }
+      break;
 
-    // Start app
-    init();
-  </script>
+    case 'select-repeat': {
+      const q = REPEAT_QUESTIONS[state.currentQ];
+      if (state.repeatChecked[q.id]) return;
+      state.repeatAnswers[q.id] = parseInt(el.dataset.idx);
+      render();
+      break;
+    }
+    case 'toggle-repeat': {
+      const q = REPEAT_QUESTIONS[state.currentQ];
+      if (state.repeatChecked[q.id]) return;
+      const idx = parseInt(el.dataset.idx);
+      let sel = state.repeatAnswers[q.id] || [];
+      if (sel.includes(idx)) sel = sel.filter(i => i !== idx);
+      else sel = [...sel, idx];
+      state.repeatAnswers[q.id] = sel;
+      render();
+      break;
+    }
+    case 'check-repeat': {
+      const q = REPEAT_QUESTIONS[state.currentQ];
+      state.repeatChecked[q.id] = true;
+      render();
+      break;
+    }
+    case 'next-repeat':
+      state.currentQ++;
+      render();
+      break;
+    case 'go-theory':
+      state.repeatScore = REPEAT_QUESTIONS.reduce((acc, q) => acc + (checkRepeatAnswer(q) ? 1 : 0), 0);
+      state.screen = SCREENS.THEORY;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      break;
+
+    case 'go-practice':
+      state.screen = SCREENS.PRACTICE;
+      state.currentQ = 0;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      break;
+
+    case 'select-practice': {
+      const q = PRACTICE_QUESTIONS[state.currentQ];
+      if (state.practiceChecked[q.id]) return;
+      state.practiceAnswers[q.id] = parseInt(el.dataset.idx);
+      render();
+      break;
+    }
+    case 'select-left': {
+      const q = PRACTICE_QUESTIONS[state.currentQ];
+      if (state.practiceChecked[q.id]) return;
+      const idx = parseInt(el.dataset.idx);
+      state._activeLeft = idx;
+      render();
+      break;
+    }
+    case 'select-right': {
+      const q = PRACTICE_QUESTIONS[state.currentQ];
+      if (state.practiceChecked[q.id]) return;
+      if (state._activeLeft === undefined) return;
+      const rightIdx = parseInt(el.dataset.idx);
+      const pairs = state.practiceAnswers[q.id] || {};
+      pairs[state._activeLeft] = rightIdx;
+      state.practiceAnswers[q.id] = pairs;
+      state._activeLeft = undefined;
+      render();
+      break;
+    }
+    case 'check-practice': {
+      const q = PRACTICE_QUESTIONS[state.currentQ];
+      state.practiceChecked[q.id] = true;
+      render();
+      break;
+    }
+    case 'next-practice':
+      state.currentQ++;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      break;
+    case 'go-results':
+      state.practiceScore = calcPracticeScore();
+      state.score = (state.repeatScore || 0) + state.practiceScore;
+      state.total = REPEAT_QUESTIONS.length + PRACTICE_QUESTIONS.length;
+      state.screen = SCREENS.RESULTS;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      break;
+
+    case 'restart':
+      Object.assign(state, {
+        screen: SCREENS.START,
+        currentQ: 0,
+        repeatAnswers: {},
+        repeatChecked: {},
+        practiceAnswers: {},
+        practiceChecked: {},
+        score: 0,
+        total: 0,
+        repeatScore: 0,
+        practiceScore: 0,
+        _activeLeft: undefined
+      });
+      render();
+      break;
+  }
+}
+
+function handleInput(e) {
+  const el = e.currentTarget;
+  const action = el.dataset.action;
+
+  if (action === 'fill-input') {
+    const q = PRACTICE_QUESTIONS[state.currentQ];
+    const idx = parseInt(el.dataset.idx);
+    const arr = state.practiceAnswers[q.id] || [];
+    arr[idx] = el.value;
+    state.practiceAnswers[q.id] = arr;
+  } else if (action === 'input-answer') {
+    const q = PRACTICE_QUESTIONS[state.currentQ];
+    state.practiceAnswers[q.id] = el.value;
+  }
+}
+
+// Проверка ответов
+function checkRepeatAnswer(q) {
+  const userAns = state.repeatAnswers[q.id];
+  if (q.type === 'choice') return userAns === q.correct;
+  if (q.type === 'multi') {
+    if (!Array.isArray(userAns)) return false;
+    const a = [...userAns].sort();
+    const b = [...q.correct].sort();
+    return a.length === b.length && a.every((v, i) => v === b[i]);
+  }
+  return false;
+}
+
+function checkBlank(val, blank) {
+  const v = (val || '').trim().toLowerCase().replace(/[^а-яёa-z0-9]/g, '');
+  if (!v) return false;
+  if (v === blank.answer.toLowerCase().replace(/[^а-яёa-z0-9]/g, '')) return true;
+  if (blank.alt) {
+    return blank.alt.some(a => v === a.toLowerCase().replace(/[^а-яёa-z0-9]/g, ''));
+  }
+  return false;
+}
+
+function checkInputQuestion(q, val) {
+  const v = (val || '').trim().toLowerCase();
+  if (v.length < 3) return false;
+  return q.keywords.some(k => v.includes(k.toLowerCase()));
+}
+
+function hasPracticeAnswer(q) {
+  const ans = state.practiceAnswers[q.id];
+  if (q.type === 'choice') return ans !== undefined && ans !== null;
+  if (q.type === 'matching') {
+    const pairs = ans || {};
+    return Object.keys(pairs).length === q.pairs.length;
+  }
+  if (q.type === 'fill') {
+    const arr = ans || [];
+    const blankIndices = [];
+    q.template.forEach((part, idx) => {
+      if (part.type === 'blank') blankIndices.push(idx);
+    });
+    return blankIndices.every(idx => (arr[idx] || '').trim().length > 0);
+  }
+  if (q.type === 'input') return (ans || '').trim().length >= 3;
+  return false;
+}
+
+function calcPracticeScore() {
+  let score = 0;
+  PRACTICE_QUESTIONS.forEach(q => {
+    const ans = state.practiceAnswers[q.id];
+    if (q.type === 'choice') {
+      if (ans === q.correct) score++;
+    } else if (q.type === 'matching') {
+      const pairs = ans || {};
+      const correct = q.pairs.filter((p, i) => pairs[i] === i).length;
+      if (correct === q.pairs.length) score++;
+    } else if (q.type === 'fill') {
+      const arr = ans || [];
+      const blankIndices = [];
+      q.template.forEach((part, idx) => {
+        if (part.type === 'blank') blankIndices.push(idx);
+      });
+      const allOk = blankIndices.every(idx => {
+        const part = q.template[idx];
+        return checkBlank(arr[idx] || '', part);
+      });
+      if (allOk) score++;
+    } else if (q.type === 'input') {
+      if (checkInputQuestion(q, ans)) score++;
+    }
+  });
+  return score;
+}
+
+// Утилиты
+function escapeHtml(str) {
+  if (str === undefined || str === null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+function escapeAttr(str) { return escapeHtml(str); }
+
+// Init
+function init() {
+  render();
+}
+init();
+</script>
 </body>
 </html>
-
-</html>
-
-
