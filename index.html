@@ -997,7 +997,6 @@ function renderPracticeFill(q) {
   const checked = state.practiceChecked[q.id];
   const userBlanks = state.practiceAnswers[q.id] || [];
 
-  // Собираем индексы пропусков в шаблоне
   const blankIndices = [];
   q.template.forEach((part, idx) => {
     if (part.type === 'blank') blankIndices.push(idx);
@@ -1187,6 +1186,8 @@ function handleClick(e) {
     }
     case 'check-practice': {
       const q = PRACTICE_QUESTIONS[state.currentQ];
+      // Защита: если ответ неполный — не проверяем
+      if (!hasPracticeAnswer(q)) return;
       state.practiceChecked[q.id] = true;
       render();
       break;
@@ -1234,9 +1235,21 @@ function handleInput(e) {
     const arr = state.practiceAnswers[q.id] || [];
     arr[idx] = el.value;
     state.practiceAnswers[q.id] = arr;
+    // Обновляем disabled состояние кнопки "Проверить" без полного ререндера,
+    // чтобы не терять фокус на поле ввода
+    updateCheckButtonState(q);
   } else if (action === 'input-answer') {
     const q = PRACTICE_QUESTIONS[state.currentQ];
     state.practiceAnswers[q.id] = el.value;
+    updateCheckButtonState(q);
+  }
+}
+
+// Обновляет disabled-атрибут кнопки "Проверить" в зависимости от полноты ответа
+function updateCheckButtonState(q) {
+  const checkBtn = app.querySelector('[data-action="check-practice"]');
+  if (checkBtn) {
+    checkBtn.disabled = !hasPracticeAnswer(q);
   }
 }
 
